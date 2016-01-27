@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">BluetoothMessenger</string>
+
+    <string name="log_view">logView</string>
+    <string name="text_log">Log</string>
+    <string name="text_input">Input</string>
+    <string name="input">Input</string>
+    <string name="text_member">Member</string>
+    <string name="member_view">memberView</string>
+    <string name="send">send</string>
+    <string name="button_scan">デバイスをスキャン</string>
+    <string name="title_other_devices">その他のデバイス</string>
+    <string name="title_paired_devices">接続履歴のあるデバイス</string>
+    <string name="scanning">スキャン中</string>
+    <string name="select_device">デバイスを選択</string>
+    <string name="none_paired">接続履歴のあるデバイスはありません</string>
+    <string name="connecting_wait">now loading...</string>
+    <string name="name_option">名前設定</string>
+    <string name="name">名前</string>
+    <string name="hint">新しい名前を入力</string>
+    <string name="set_name">決定</string>
+</resources>

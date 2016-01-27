@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#9f9"
+    tools:context="jp.ac.it_college.std.s14007.android.bluetoothmessenger.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_member"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#eee"
+        android:orientation="horizontal"
+        android:layout_above="@+id/layout_insert"
+        >
+
+        <LinearLayout
+            android:id="@+id/member"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/text_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text_member" />
+
+            <TextView
+                android:id="@+id/member_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/member_view" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_log"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:background="#9f7"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/text_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_log"
+                />
+
+            <TextView
+                android:id="@+id/log_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/log_view"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_insert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/input"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:background="#fff"
+            android:textColor="#f55"
+            android:text="@string/send"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
