@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="jp.ac.it_college.std.s14007.android.bluetoothmessenger">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -11,7 +12,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +32,6 @@
             android:label="@string/name_option"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog"
-
             />
     </application>
 
