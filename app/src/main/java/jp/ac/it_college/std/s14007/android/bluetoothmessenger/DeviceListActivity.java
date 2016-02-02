@@ -22,7 +22,6 @@ import java.util.Set;
 
 public class DeviceListActivity extends Activity {
 
-    public static final String OUI_LEGO = "00:16:53";
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     static final String PAIRING = "pairing";
     private Intent intent = getIntent();
