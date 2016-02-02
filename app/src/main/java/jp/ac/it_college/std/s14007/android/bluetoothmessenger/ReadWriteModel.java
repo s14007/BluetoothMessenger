@@ -4,6 +4,10 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,11 +25,13 @@ public class ReadWriteModel extends Thread {
 //    private String sendNumber;
     private Handler myHandler;
     private Context mContext;
+    public String string;
+    private Context mainContext;
+    private String message = "test";
 
 
     //コンストラクタの定義
-    public ReadWriteModel(Context context, BluetoothSocket socket, Handler handler){
-        myHandler = handler;
+    public ReadWriteModel(Context context, BluetoothSocket socket){
         mContext = context;
 
         try {
@@ -36,6 +42,13 @@ public class ReadWriteModel extends Thread {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+    }
+
+    public ReadWriteModel(Context context, String msg) {
+        mainContext = context;
+        message = msg;
+        TextView textView = (TextView)((MainActivity) mainContext).findViewById(R.id.member_view);
+        textView.setText(message);
     }
 
     public void write(byte[] buf){
@@ -50,35 +63,40 @@ public class ReadWriteModel extends Thread {
 
     public void run() {
         byte[] buf = new byte[1024];
-        String rcvNum = null;
+//        string = "test"
+        byte[] byteData = message.getBytes();
+        String rcvStr = null;
         int tmpBuf = 0;
-//
-//        try {
-//            write(sendNumber.getBytes("UTF-8"));
-//        } catch (UnsupportedEncodingException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
+
+        Log.e("mainMessage :", message);
+
+        write(byteData);
 
         while(true){
             try {
                 tmpBuf = in.read(buf);
+                Log.e("tmpBuf :", String.valueOf(tmpBuf));
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             if(tmpBuf!=0){
                 try {
-                    rcvNum = new String(buf, "UTF-8");
+                    rcvStr = new String(buf, "UTF-8");
+                    Log.e("read :", rcvStr);
                 } catch (UnsupportedEncodingException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
 
-            /*Intent i = new Intent(mContext, StreamActivity.class);
-            i.putExtra("message", rcvNum);
-            mContext.startActivity(i);*/
+            Intent i = new Intent(mContext, MainActivity.class);
+            i.putExtra("message", rcvStr);
+            mContext.startActivity(i);
         }
+    }
+
+    public void setString(String string) {
+        this.string = string;
     }
 }

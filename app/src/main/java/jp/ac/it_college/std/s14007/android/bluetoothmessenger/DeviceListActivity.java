@@ -25,8 +25,9 @@ public class DeviceListActivity extends Activity {
     public static final String OUI_LEGO = "00:16:53";
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     static final String PAIRING = "pairing";
-    public Context context;
+    private Intent intent = getIntent();
     private Handler handler;
+    private BluetoothClientThread bluetoothClientThread;
 
     private ArrayAdapter<String> mCandidateServers;
     private BluetoothAdapter mBluetoothAdapter;
@@ -41,13 +42,16 @@ public class DeviceListActivity extends Activity {
                 mDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // 名前とアドレスを所定のフォーマットで ArrayAdapter に格納
                 mCandidateServers.add(mDevice.getName() + "\n" + mDevice.getAddress());
-            }/* else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Log.d("log:", "ACTION_DISCOVERY_FINISHED");
-                // デバイス検出が終了した場合は、BroadcastReceiver を解除
-                context.unregisterReceiver(mReceiver);
-            }*/
+            }
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BluetoothServerThread bluetoothServerThread = new BluetoothServerThread(DeviceListActivity.this, mBluetoothAdapter);
+        bluetoothServerThread.start();
+    }
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -61,6 +65,10 @@ public class DeviceListActivity extends Activity {
             intent.putExtras(data);
 
             setResult(Activity.RESULT_OK, intent);
+            Log.e("deviceClickListener :", "getAddress");
+
+            bluetoothClientThread = new BluetoothClientThread(DeviceListActivity.this, address, mBluetoothAdapter);
+            bluetoothClientThread.start();
             finish();
         }
     };

@@ -1,6 +1,9 @@
 package jp.ac.it_college.std.s14007.android.bluetoothmessenger;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +14,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class NameOption extends Activity {
+    private Context context;
 
     public String getName() {
         return name;
     }
 
+    public NameOption(Context context) {
+        this.context = context;
+    }
+
     private String name = "guest";
+    private Intent intent = getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

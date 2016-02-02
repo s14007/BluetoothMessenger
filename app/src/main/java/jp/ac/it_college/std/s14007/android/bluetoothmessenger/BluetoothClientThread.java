@@ -5,6 +5,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.EditText;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -15,22 +17,21 @@ import java.util.UUID;
 public class BluetoothClientThread extends Thread {
     //クライアント側の処理
     private final BluetoothSocket clientSocket;
-    private final BluetoothDevice mDevice;
     private Context mContext;
     //UUIDの生成
     public static final UUID TECHBOOSTER_BTSAMPLE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     static BluetoothAdapter myClientAdapter;
     public String myNumber;
-    private Handler myHandler;
+    public ReadWriteModel rw;
+    private BluetoothDevice device = null;
 
     //コンストラクタ定義
-    public BluetoothClientThread(Context context, Handler handler , BluetoothDevice device, BluetoothAdapter btAdapter){
+    public BluetoothClientThread(Context context, String address, BluetoothAdapter btAdapter){
         //各種初期化
         mContext = context;
         BluetoothSocket tmpSock = null;
-        mDevice = device;
+        device = btAdapter.getRemoteDevice(address);
         myClientAdapter = btAdapter;
-        this.myHandler = handler;
 
         try{
             //自デバイスのBluetoothクライアントソケットの取得
@@ -60,7 +61,8 @@ public class BluetoothClientThread extends Thread {
         }
 
         //接続完了時の処理
-        ReadWriteModel rw = new ReadWriteModel(mContext, clientSocket, myHandler);
+        Log.e("BluetoothClientThread :", "接続完了");
+        rw = new ReadWriteModel(mContext, clientSocket);
         rw.start();
     }
 
